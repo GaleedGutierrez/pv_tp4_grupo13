@@ -1,0 +1,33 @@
+:root {
+	/* Typography scale */
+	--fs-base: 62.5%;
+
+	/* Weight */
+	--weight-normal: 400;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+
+	/* Typography applications */
+	--fs-body-sm: 1.3rem;
+	--fs-body-md: 1.5rem;
+	--fs-body-lg: 1.6rem;
+	--fs-title-sm: 1.4rem;
+	--fs-title-md: 1.8rem;
+	--fs-title-lg: 2rem;
+	--fs-title-xl: 2.4rem;
+
+	/* Line Height */
+	--lh-body-sm: 1.9rem;
+	--lh-body-md: 2.2rem;
+	--fh-body-lg: 2.3rem;
+	--lh-title-sm: 2rem;
+	--lh-title-md: 2.6rem;
+	--lh-title-lg: 2.9rem;
+	--lh-title-xl: 3.5rem;
+
+	/* Word Spacing */
+	--ws-title-sm: -0.2rem;
+	--ws-title-md: -0.25rem;
+	--ws-title-lg: -0.25rem;
+	--ws-title-xl: -0.33rem;
+}

@@ -1,0 +1,26 @@
+:root {
+	/* Primary */
+	--purple-x11: oklch(58% 0.2731 311.82);
+	--royal-blue: oklch(55% 0.202 269.89);
+	--american-blue-darker: oklch(38% 0.0706 273.99);
+	--white: oklch(100% 0 0);
+	--alice-blue: oklch(96% 0.0176 278.0488);
+	--ghost-white: oklch(98% 0.0069 277.16);
+	--american-blue: oklch(40% 0.0826 274.47);
+	--dark-blue-gray: oklch(45% 0.05 269.46);
+	--vivid-tangerine: oklch(78% 0.1076 37.67);
+	--maya-blue: oklch(77% 0.1245 240.29);
+	--jasper: oklch(58% 0.1969 25.8);
+
+	/* Text */
+	--text-color-primary: var(--dark-blue-gray);
+	--text-color-secondary: var(--american-blue);
+	--text-color-tertiary: var(--white);
+
+	/* Background */
+	--background-primary: var(--ghost-white);
+	--background-secondary: var(--american-blue-darker);
+	--background-tertiary: var(--purple-x11);
+	--background-quaternary: var(--jasper);
+	--background-quinary: var(--ghost-white);
+}

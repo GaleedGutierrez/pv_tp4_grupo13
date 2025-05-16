@@ -1,0 +1,43 @@
+.bg-purple-x11 {
+	background-color: var(--purple-x11);
+}
+
+.bg-royal-blue {
+	background-color: var(--royal-blue);
+}
+
+.bg-american-blue-darker {
+	background-color: var(--american-blue-darker);
+}
+
+.bg-white {
+	background-color: var(--white);
+}
+
+.bg-alice-blue {
+	background-color: var(--alice-blue);
+}
+
+.bg-ghost-white {
+	background-color: var(--ghost-white);
+}
+
+.bg-american-blue {
+	background-color: var(--american-blue);
+}
+
+.bg-dark-blue-gray {
+	background-color: var(--dark-blue-gray);
+}
+
+.bg-vivid-tangerine {
+	background-color: var(--vivid-tangerine);
+}
+
+.bg-maya-blue {
+	background-color: var(--maya-blue);
+}
+
+.bg-jasper {
+	background-color: var(--jasper);
+}
