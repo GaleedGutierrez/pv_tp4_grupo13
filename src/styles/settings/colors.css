@@ -1,26 +1,40 @@
 :root {
 	/* Primary */
 	--purple-x11: oklch(58% 0.2731 311.82);
+	--heliotrope: oklch(66.81% 0.2341 314.1);
 	--royal-blue: oklch(55% 0.202 269.89);
+	--cornflower-blue: oklch(68.71% 0.1545 273.09);
 	--american-blue-darker: oklch(38% 0.0706 273.99);
 	--white: oklch(100% 0 0);
 	--alice-blue: oklch(96% 0.0176 278.0488);
 	--ghost-white: oklch(98% 0.0069 277.16);
 	--american-blue: oklch(40% 0.0826 274.47);
+	--dark-blue-gray-2: oklch(55.29% 0.0832 275.96);
 	--dark-blue-gray: oklch(45% 0.05 269.46);
 	--vivid-tangerine: oklch(78% 0.1076 37.67);
 	--maya-blue: oklch(77% 0.1245 240.29);
 	--jasper: oklch(58% 0.1969 25.8);
+	--light-coral: oklch(73.02% 0.1189 20.36);
 
 	/* Text */
 	--text-color-primary: var(--dark-blue-gray);
 	--text-color-secondary: var(--american-blue);
 	--text-color-tertiary: var(--white);
+	--text-color-quaternary: var(--alice-blue);
 
 	/* Background */
 	--background-primary: var(--ghost-white);
 	--background-secondary: var(--american-blue-darker);
 	--background-tertiary: var(--purple-x11);
+	--background-tertiary-hover: var(--heliotrope);
 	--background-quaternary: var(--jasper);
+	--background-quaternary-hover: var(--light-coral);
 	--background-quinary: var(--ghost-white);
+	--background-senary: var(--american-blue);
+	--background-senary-hover: var(--dark-blue-gray-2);
+	--background-septenary: var(--royal-blue);
+	--background-septenary-hover: var(--cornflower-blue);
+
+	/* Border */
+	--border-color-primary: var(--royal-blue);
 }

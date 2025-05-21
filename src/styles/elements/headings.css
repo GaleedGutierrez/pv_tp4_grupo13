@@ -25,10 +25,3 @@ h4 {
 	line-height: var(--lh-title-sm);
 	word-spacing: var(--ws-title-sm);
 }
-
-h1,
-h2,
-h3,
-h4 {
-	color: var(--text-color-secondary);
-}
