@@ -1,0 +1,18 @@
+.product-section-header {
+	display: flex;
+	justify-content: space-between;
+	padding: var(--space-6);
+	border-radius: var(--border-radius-3);
+	background: var(--background-senary);
+	color: var(--text-color-tertiary);
+}
+
+.product-section-header__count {
+	display: flex;
+	gap: var(--space-4);
+	align-items: center;
+
+	.product-section-header__count--title {
+		color: var(--text-color-tertiary);
+	}
+}
