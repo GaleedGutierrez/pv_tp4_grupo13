@@ -85,7 +85,7 @@ export const ProductForm = ({
 		/*** @type {Product[]} */
 		const PRODUCTS = JSON.parse(localStorage.getItem('products') ?? '[]');
 
-		if (idProductToEdit) {
+		if (idProductToEdit && setIdProductToEdit) {
 			if (!PRODUCTS) {
 				return;
 			}
@@ -166,7 +166,7 @@ export const ProductForm = ({
 		setPriceWithDiscount('');
 		isAddingProduct(false);
 
-		if (idProductToEdit) {
+		if (idProductToEdit && setIdProductToEdit) {
 			setIdProductToEdit('');
 		}
 	};
