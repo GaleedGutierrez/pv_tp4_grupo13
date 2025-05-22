@@ -12,7 +12,7 @@ import styles from './index.module.css';
  * @property {React.Dispatch<React.SetStateAction<boolean>>} isAddingProduct - The function to cancel adding a product
  * @property {React.Dispatch<React.SetStateAction<Product[]>>} setProducts - The function to set the products
  * @property {string} [idProductToEdit] - The id of the product to edit (optional)
- * @property {React.Dispatch<React.SetStateAction<string>>} setIdProductToEdit - The function to set the id of the product to edit
+ * @property {React.Dispatch<React.SetStateAction<string>>} [setIdProductToEdit] - The function to set the id of the product to edit
  */
 
 /**
