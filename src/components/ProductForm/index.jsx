@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 import AddIcon from '@assets/icons/add-icon.svg';
 import { getPriceWithDiscount as getPriceWithDiscountFunction } from '@utils/getPriceWithDiscount';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -10,6 +11,8 @@ import styles from './index.module.css';
  * @typedef {Object} ProductFormProps
  * @property {React.Dispatch<React.SetStateAction<boolean>>} isAddingProduct - The function to cancel adding a product
  * @property {React.Dispatch<React.SetStateAction<Product[]>>} setProducts - The function to set the products
+ * @property {string} [idProductToEdit] - The id of the product to edit (optional)
+ * @property {React.Dispatch<React.SetStateAction<string>>} setIdProductToEdit - The function to set the id of the product to edit
  */
 
 /**
@@ -18,13 +21,40 @@ import styles from './index.module.css';
  * @param {ProductFormProps} props - The component props
  * @returns {import('react').JSX.Element}
  */
-export const ProductForm = ({ isAddingProduct, setProducts }) => {
-	const [id, setId] = useState('');
-	const [description, setDescription] = useState('');
-	const [stock, setStock] = useState('');
-	const [price, setPrice] = useState('');
-	const [discount, setDiscount] = useState('');
-	const [priceWithDiscount, setPriceWithDiscount] = useState('');
+export const ProductForm = ({
+	isAddingProduct,
+	setProducts,
+	idProductToEdit,
+	setIdProductToEdit,
+}) => {
+	/*** @type {Product | undefined} */
+	let productToEdit = undefined;
+
+	if (idProductToEdit) {
+		/*** @type {Product[]} */
+		const PRODUCTS = JSON.parse(localStorage.getItem('products') ?? '[]');
+
+		productToEdit = PRODUCTS.find(
+			(product) => product.id === idProductToEdit,
+		);
+	}
+
+	const [id, setId] = useState(productToEdit ? productToEdit.id : '');
+	const [description, setDescription] = useState(
+		productToEdit ? productToEdit.description : '',
+	);
+	const [stock, setStock] = useState(
+		productToEdit ? productToEdit.stock : '',
+	);
+	const [price, setPrice] = useState(
+		productToEdit ? productToEdit.price : '',
+	);
+	const [discount, setDiscount] = useState(
+		productToEdit ? productToEdit.discount : '',
+	);
+	const [priceWithDiscount, setPriceWithDiscount] = useState(
+		productToEdit ? productToEdit?.priceWithDiscount : '',
+	);
 	const getPriceWithDiscount = useCallback(getPriceWithDiscountFunction, []);
 	const getPriceWithDiscountMemo = useMemo(
 		() => getPriceWithDiscount(Number(price), Number(discount)),
@@ -32,6 +62,12 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 	);
 
 	useEffect(() => {
+		if (price === '' || discount === '') {
+			setPriceWithDiscount('');
+
+			return;
+		}
+
 		const priceWithDiscount = getPriceWithDiscountMemo;
 
 		setPriceWithDiscount(priceWithDiscount.toFixed(2).replace('.', ','));
@@ -46,31 +82,66 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 	const handleSaveAdding = (event) => {
 		event.preventDefault();
 
-		const newProduct = {
-			id: Number(id),
-			description,
-			stock: Number(stock),
-			price: Number(price),
-			priceWithDiscount: Number(priceWithDiscount.replace(',', '.')),
-			discount: Number(discount),
-		};
-
 		/*** @type {Product[]} */
 		const PRODUCTS = JSON.parse(localStorage.getItem('products') ?? '[]');
-		const MATCHING_PRODUCT = PRODUCTS.find(
-			(product) => product.id === newProduct.id,
-		);
 
-		if (MATCHING_PRODUCT) {
-			alert('Ya existe un producto con ese ID');
+		if (idProductToEdit) {
+			if (!PRODUCTS) {
+				return;
+			}
 
-			return;
+			const INDEX_PRODUCT = PRODUCTS.findIndex(
+				(product) => product.id === idProductToEdit,
+			);
+
+			if (INDEX_PRODUCT === -1) {
+				alert('Producto no encontrado');
+
+				return;
+			}
+
+			PRODUCTS[INDEX_PRODUCT] = {
+				id,
+				description,
+				stock,
+				price,
+				priceWithDiscount: priceWithDiscount
+					? priceWithDiscount.replace(',', '.')
+					: '',
+				discount,
+			};
+
+			alert('Producto editado correctamente');
+			setIdProductToEdit('');
+		} else {
+			const newProduct = {
+				id,
+				description,
+				stock,
+				price,
+				priceWithDiscount: priceWithDiscount
+					? priceWithDiscount.replace(',', '.')
+					: '',
+				discount,
+			};
+
+			const MATCHING_PRODUCT = PRODUCTS.find(
+				(product) => product.id === newProduct.id,
+			);
+
+			if (MATCHING_PRODUCT) {
+				alert('Ya existe un producto con ese ID');
+
+				return;
+			}
+
+			PRODUCTS.push(newProduct);
+			alert('Producto agregado correctamente');
 		}
 
-		PRODUCTS.push(newProduct);
 		localStorage.setItem('products', JSON.stringify(PRODUCTS));
-		setProducts(PRODUCTS);
 
+		setProducts(PRODUCTS);
 		setId('');
 		setDescription('');
 		setStock('');
@@ -78,7 +149,6 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 		setDiscount('');
 		setPriceWithDiscount('');
 		isAddingProduct(false);
-		alert('Producto agregado correctamente');
 	};
 
 	/**
@@ -95,6 +165,10 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 		setDiscount('');
 		setPriceWithDiscount('');
 		isAddingProduct(false);
+
+		if (idProductToEdit) {
+			setIdProductToEdit('');
+		}
 	};
 
 	return (
@@ -168,7 +242,7 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 					<InputForm
 						classNameInput="a-input body-md"
 						classNameLabel="flex flex-col"
-						inputValue={discount}
+						inputValue={discount ?? ''}
 						label="Ingresa el descuento del producto % (opcional)"
 						name="discount"
 						placeholder="25%"
@@ -177,7 +251,12 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 					/>
 				</div>
 				<div>
-					<h3>Precio final a publicar ${priceWithDiscount}</h3>
+					<h3>
+						Precio final a publicar $
+						{priceWithDiscount && priceWithDiscount.length > 0
+							? priceWithDiscount
+							: price}
+					</h3>
 				</div>
 				<div className={styles['product-form__actions']}>
 					<button
@@ -187,7 +266,7 @@ export const ProductForm = ({ isAddingProduct, setProducts }) => {
 						Cancelar
 					</button>
 					<button className="a-button a-button--primary">
-						Agregar
+						{idProductToEdit ? 'Guardar' : 'Agregar'}
 					</button>
 				</div>
 			</form>
