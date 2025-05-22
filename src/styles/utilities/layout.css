@@ -20,6 +20,10 @@
 	gap: var(--space-5);
 }
 
+.gap-6 {
+	gap: var(--space-6);
+}
+
 .mb-b-5 {
 	margin-block-end: var(--space-5);
 }

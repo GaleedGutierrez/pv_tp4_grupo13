@@ -21,6 +21,8 @@
 	--text-color-secondary: var(--american-blue);
 	--text-color-tertiary: var(--white);
 	--text-color-quaternary: var(--alice-blue);
+	--text-color-quinary: var(--royal-blue);
+	--text-color-senary: var(--jasper);
 
 	/* Background */
 	--background-primary: var(--ghost-white);
@@ -34,6 +36,8 @@
 	--background-senary-hover: var(--dark-blue-gray-2);
 	--background-septenary: var(--royal-blue);
 	--background-septenary-hover: var(--cornflower-blue);
+	--background-octonary: var(--white);
+	--background-nonary: var(--alice-blue);
 
 	/* Border */
 	--border-color-primary: var(--royal-blue);

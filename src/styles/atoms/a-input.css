@@ -1,0 +1,17 @@
+.a-input {
+	padding-block: var(--space-3);
+	padding-inline: var(--space-6);
+	border: none;
+	border-radius: var(--border-radius-1);
+	background-color: var(--background-quinary);
+	color: var(--text-color-secondary);
+	caret-color: var(--text-color-secondary);
+
+	&:focus-visible {
+		outline: var(--border-025) solid var(--border-color-primary);
+	}
+}
+
+.a-input__error-message {
+	color: var(--text-color-senary);
+}
