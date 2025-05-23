@@ -11,7 +11,60 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Vite + React</title>
+		<style>
+			:root {
+				--font-fallback-base:
+					system-ui, -apple-system, blinkmacsystemfont, "Segoe UI",
+					"Noto Sans", helvetica, arial, sans-serif,
+					"Apple Color Emoji", "Segoe UI Emoji";
+				--font-fallback:
+					"Adjusted Arial Fallback", var(--font-fallback-base);
+				--font-primary: "Jost", var(--font-fallback);
+			}
+			@font-face {
+				font-family: "Adjusted Arial Fallback";
+				src: local(Arial);
+				size-adjust: 109%;
+				ascent-override: 107%;
+				font-size: 1rem;
+				line-height: 1.6;
+				letter-spacing: -0.25px;
+			}
+			@font-face {
+				font-family: "Jost";
+				src:
+					local("Jost"),
+					url("./src/assets/fonts/jost-v18-latin/jost-v18-latin-700.woff2")
+						format("woff2");
+				font-weight: var(--weight-black);
+				font-weight: bold;
+				font-style: normal;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: "Jost";
+				src:
+					local("Jost"),
+					url("./src/assets/fonts/jost-v18-latin/jost-v18-latin-600.woff2")
+						format("woff2");
+				font-weight: var(--weight-black);
+				font-weight: 600;
+				font-style: normal;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: "Jost";
+				src:
+					local("Jost"),
+					url("./src/assets/fonts/jost-v18-latin/jost-v18-latin-regular.woff2")
+						format("woff2");
+				font-weight: var(--weight-black);
+				font-weight: normal;
+				font-style: normal;
+				font-display: swap;
+			}
+		</style>
+		<title>TP N°4</title>
 	</head>
 	<body>
 		<div id="root"></div>

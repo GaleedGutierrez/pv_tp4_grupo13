@@ -1,50 +1,82 @@
-import './App.css';
+import { SideBar } from '@components/SideBar';
+import { useEffect, useState } from 'react';
 
-import reactLogo from '@assets/react.svg';
-import { useState } from 'react';
+import styles from './App.module.css';
+import { ProductForm } from './components/ProductForm';
+import { ProductList } from './components/ProductList';
+import { ProductSectionHeader } from './components/ProductSectionHeader';
 
-import viteLogo from '/vite.svg';
-
+/** @import { Product } from '@models/Product.model' */
+/**
+ * @description Main App component
+ * @returns {import('react').JSX.Element}
+ * @example <App />
+ */
 function App() {
-	const [count, setCount] = useState(0);
+	const [inputValue, setInputValue] = useState('');
+	const [isAddingProduct, setIsAddingProduct] = useState(false);
+	const [accountProducts, setAccountProducts] = useState(0);
+	const [products, setProducts] = useState(/** @type {Product[]} */ ([]));
+	const [idProductToEdit, setIdProductToEdit] = useState('');
+
+	useEffect(() => {
+		const products = JSON.parse(localStorage.getItem('products') ?? '[]');
+
+		console.info(`products: ${products}`);
+		setProducts(products);
+	}, []);
+
+	useEffect(() => {
+		setAccountProducts(products.length);
+		console.info(`accountProducts: ${accountProducts}`);
+	}, [products, accountProducts]);
+
+	if (idProductToEdit) {
+		return (
+			<main className="h-screen flex-center ">
+				<ProductForm
+					idProductToEdit={idProductToEdit}
+					isAddingProduct={setIsAddingProduct}
+					setIdProductToEdit={setIdProductToEdit}
+					setProducts={setProducts}
+				/>
+			</main>
+		);
+	}
+
+	if (isAddingProduct) {
+		return (
+			<main className="h-screen flex-center ">
+				<ProductForm
+					isAddingProduct={setIsAddingProduct}
+					setProducts={setProducts}
+				/>
+			</main>
+		);
+	}
 
 	return (
-		<>
-			<div>
-				<a
-					href="https://vite.dev"
-					target="_blank"
-				>
-					<img
-						alt="Vite logo"
-						className="logo"
-						src={viteLogo}
-					/>
-				</a>
-				<a
-					href="https://react.dev"
-					target="_blank"
-				>
-					<img
-						alt="React logo"
-						className="logo react"
-						src={reactLogo}
-					/>
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</>
+		<div className={styles['app']}>
+			<SideBar
+				className={styles['sidebar']}
+				inputValue={inputValue}
+				setInputValue={setInputValue}
+			/>
+
+			<main className="flex flex-col gap-6">
+				<ProductSectionHeader
+					accountProducts={accountProducts}
+					openAddNewProduct={setIsAddingProduct}
+				/>
+				<ProductList
+					products={products}
+					searchValue={inputValue}
+					setIdProductToEdit={setIdProductToEdit}
+					setIsAddingProduct={setIsAddingProduct}
+					setProducts={setProducts}
+				/>
+			</main>
+		</div>
 	);
 }
 
