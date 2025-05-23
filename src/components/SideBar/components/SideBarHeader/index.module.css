@@ -1,0 +1,24 @@
+.sidebar-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	height: 14rem;
+	padding: var(--space-6);
+	border-radius: var(--border-radius-3);
+	background: linear-gradient(
+		225deg,
+		rgb(232 77 112 / 100%) 0%,
+		rgb(163 55 246 / 100%) 53%,
+		rgb(40 167 237 / 100%) 100%
+	);
+}
+
+.sidebar-header__title,
+.sidebar-header__subtitle {
+	margin: 0;
+	color: var(--text-color-tertiary);
+}
+
+.sidebar-header__subtitle {
+	opacity: 0.75;
+}

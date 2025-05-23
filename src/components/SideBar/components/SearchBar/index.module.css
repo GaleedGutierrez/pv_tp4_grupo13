@@ -1,0 +1,10 @@
+.search-bar {
+	padding: var(--space-6);
+	border-radius: var(--border-radius-3);
+	background-color: var(--text-color-tertiary);
+}
+
+.search-bar__label {
+	display: flex;
+	flex-direction: column;
+}
