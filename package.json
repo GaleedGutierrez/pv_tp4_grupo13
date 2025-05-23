@@ -85,7 +85,7 @@
 		"husky": "^9.1.7",
 		"jscpd": "^4.0.5",
 		"lightningcss": "^1.30.1",
-		"markdownlint-cli2": "^0.18.0",
+		"markdownlint-cli2": "^0.18.1",
 		"prettier": "^3.5.3",
 		"stylelint": "^16.19.1",
 		"stylelint-config-standard": "^38.0.0",
